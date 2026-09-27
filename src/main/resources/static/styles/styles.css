@@ -1,0 +1,430 @@
+/* ==========================================================
+   NÉBULA MUSIC - CÓDIGO BASE (ESTILOS PARA ALUMNOS)
+   ==========================================================
+   Este archivo contiene únicamente la configuración inicial, 
+   reseteo básico y la paleta de colores del proyecto mediante 
+   variables de CSS (:root).
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+:root {
+  --bg-color-dark: #131200; /* Fondo principal modo oscuro */
+  --text-color-dark: #edf2f4; /* Texto principal */
+  --links-color-dark: #efbdeb; /* Color normal de enlaces */
+  --links-hover-dark: #8d91c7; /* Color de enlaces al pasar el mouse */
+  --nav-links: #8d3fd1; /* Color de enlaces de navegación */
+  --highlight: #edf67d; /* Color de acento/resaltados */
+  --card-bg-dark: #1c1a05;
+  --radius: 12px;
+}
+
+/* Reset básico de márgenes, paddings y modelo de caja */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+  font-family: "Quicksand", sans-serif;
+  line-height: 1.6;
+}
+
+/* Enlaces base */
+a {
+  color: var(--links-color-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--links-hover-dark);
+}
+
+/* ============== MENU ================ */
+
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  padding: 10px 20px;
+  background-color: rgba(19, 18, 0, 0.95);
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-color-dark);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--text-color-dark);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--highlight);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    justify-content: space-between;
+    z-index: 20;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
+  /* Panel a pantalla completa */
+  nav ul {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    background-color: rgba(19, 18, 0, 0.98);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+    z-index: 10;
+  }
+
+  nav ul li {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  #menu-toggle:checked ~ ul {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #menu-toggle:checked ~ ul li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #menu-toggle:checked ~ .menu-button span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #menu-toggle:checked ~ .menu-button span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-toggle:checked ~ .menu-button span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  body:has(#menu-toggle:checked) {
+    overflow: hidden;
+  }
+}
+
+/* ============== CABECERA ================ */
+
+header.principal {
+  position: relative;
+}
+
+header.principal img {
+  display: block;
+}
+
+header.principal h1 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+#noticias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+#noticias h2 {
+  grid-column: 1 / -1;
+  color: var(--highlight);
+  font-size: 1.8rem;
+}
+
+#noticias article {
+  background-color: var(--card-bg-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid #2a280a;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+#noticias article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+#noticias article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+#noticias article .content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+#noticias article h3 {
+  color: var(--highlight);
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+#noticias article p {
+  font-size: 0.9rem;
+  color: #cbd5e0;
+}
+
+/* ============== PIE DE PAGINA ================ */
+
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #2a280a;
+  color: #cbd5e0;
+  font-size: 0.9rem;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 40px 20px;
+}
+
+.auth-card {
+  background-color: var(--card-bg-dark);
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 30px;
+  border: 1px solid #2a280a;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card h1 {
+  text-align: center;
+  color: var(--highlight);
+  margin-bottom: 25px;
+}
+
+.auth-card > p {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .auth-card {
+    max-width: 550px;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #cbd5e0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  background-color: #2a280a;
+  color: var(--text-color-dark);
+  font-family: "Quicksand", sans-serif;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--highlight);
+  box-shadow: 0 0 8px rgba(237, 246, 125, 0.3);
+}
+
+input:required:not([type="radio"]):not([type="checkbox"]),
+select:required {
+  border-left: 4px solid var(--nav-links);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+select option {
+  background-color: var(--card-bg-dark);
+  color: var(--text-color-dark);
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
+  accent-color: var(--highlight);
+  cursor: pointer;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-group label,
+.checkbox-group label {
+  display: inline;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-color-dark);
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: none;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.btn-primary {
+  background-color: var(--nav-links);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--highlight);
+  color: black;
+  box-shadow: 0 0 15px rgba(237, 246, 125, 0.4);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #c8d5e0;
+  color: #cbd5e0;
+}
+
+.btn-secondary:hover {
+  background-color: #c8d5e0;
+  color: black;
+}
+
+/* ============== PAGINA DE ERROR ================ */
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 70vh;
+  padding: 40px 20px;
+}
+
+.error-container h1 {
+  color: var(--highlight);
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.error-container p {
+  color: #cbd5e0;
+  margin-bottom: 30px;
+}
+
+.error-container .btn-primary {
+  display: inline-block;
+  padding: 14px 30px;
+  text-decoration: none;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+    <style>
+        .contenedor-basico {
+            display: grid;
+            grid-template-columns: 200px 200px 200px;
+            gap: 10px;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 30px;
+        }
+
+        .caja-basica {
+            height: 100px;
+            background-color: aquamarine;
+            border: 2px solid blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /** Se aplica solo cuando el ancho de la pantalla mide 768px o menos. */
+        @media (max-width: 768px) {
+            body {
+                background-color: blue;
+            }
+
+            .contenedor-basico {
+                grid-template-columns: 100px 100px;
+            }
+        }
+
+        /** Este se aplica solo cuando la pantalla mide 768px o mas */
+        @media (min-width: 768px) {
+            body {
+                background-color: chocolate;
+            }
+        }
+
+        @media (width >= 768px) {
+            /* ... */
+        }
+
+        @media (425px < width < 768px) {
+            /* ... */
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor-basico">
+    <div class="caja-basica">1</div>
+    <div class="caja-basica">2</div>
+    <div class="caja-basica">3</div>
+    <div class="caja-basica">4</div>
+    <div class="caja-basica">5</div>
+    <div class="caja-basica">6</div>
+</div>
+</body>
+</html>
